@@ -397,7 +397,10 @@
           "commercialDataUrlLabel": "Commercial Data Submodel URL",
           "notYetSupported": "This functionality is not yet supported",
           "submodelRepositoryHint": "Submodel Repository can currently only be set via the separate section below.",
-          "noDuplicatedNames": "AAS repository names must be unique."
+          "noDuplicatedNames": "AAS repository names must be unique.",
+          "enabled": "Enabled",
+          "disabled": "Disabled",
+          "disabledHint": "Disabled repositories are not visible."
         },
         "addButton": "Add more",
         "resetSuccessful": "Connections were reset.",
