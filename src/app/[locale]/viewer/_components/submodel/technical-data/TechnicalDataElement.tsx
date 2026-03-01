@@ -12,6 +12,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { Box, Typography, useTheme } from '@mui/material';
 import React, { useState } from 'react';
+import { IconCircleWrapper } from 'components/basics/IconCircleWrapper';
 import { getKeyType } from 'lib/util/KeyTypeUtil';
 import { DataRowWithUnit } from 'app/[locale]/viewer/_components/submodel/technical-data/ConceptDescriptionDataRow';
 import { TreeItem } from '@mui/x-tree-view';
@@ -27,7 +28,8 @@ export const TechnicalDataElement = (props: {
     label: string;
     header: string;
     isExpanded: boolean;
-    showUnits?: boolean
+    showUnits?: boolean;
+    icon?: React.ReactNode;
 }) => {
     const t = useTranslations('pages.aasViewer.submodels');
     const theme = useTheme();
@@ -184,7 +186,18 @@ export const TechnicalDataElement = (props: {
     return (
         <TreeItem
             itemId={props.label}
-            label={props.header.toUpperCase()}
+            label={
+                <Box display='flex' alignItems='center' gap={1}>
+                    {props.icon && (
+                        <IconCircleWrapper>
+                            {props.icon}
+                        </IconCircleWrapper>
+                    )}
+                    <Typography sx={{ ...theme.typography.h4 }}>
+                        {props.header.toUpperCase()}
+                    </Typography>
+                </Box>
+            }
             sx={{
                 '& .MuiTreeItem-content': {
                     py: 1,
@@ -198,7 +211,6 @@ export const TechnicalDataElement = (props: {
                 },
                 '&& .MuiTreeItem-label': {
                     m: 1,
-                    ...theme.typography.h4,
                 },
             }}
             key={props.label}

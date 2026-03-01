@@ -12,7 +12,7 @@ import {
     GenericSubmodelDetailComponent
 } from 'app/[locale]/viewer/_components/submodel/generic-submodel/GenericSubmodelDetailComponent';
 import { Box, IconButton, Tooltip } from '@mui/material';
-import { UnfoldLess, UnfoldMore, Search } from '@mui/icons-material';
+import { UnfoldLess, UnfoldMore, Search, BuildOutlined, InfoOutlined, CategoryOutlined, NotesOutlined } from '@mui/icons-material';
 import { collectAllTreeItemIds } from 'app/[locale]/viewer/_components/submodel/technical-data/TechnicalDataTreeItemUtil';
 
 export function TechnicalDataDetail({ submodel }: SubmodelVisualizationProps) {
@@ -102,6 +102,7 @@ export function TechnicalDataDetail({ submodel }: SubmodelVisualizationProps) {
                         submodelId={submodel.id}
                         isExpanded={expandedItems.includes('technicalProperties')}
                         showUnits={true}
+                        icon={<BuildOutlined fontSize='small' color='primary' />}
                     />
                 )}
                 {generalInformation?.value && (
@@ -111,6 +112,7 @@ export function TechnicalDataDetail({ submodel }: SubmodelVisualizationProps) {
                         elements={generalInformation.value}
                         submodelId={submodel.id}
                         isExpanded={expandedItems.includes('generalInformation')}
+                        icon={<InfoOutlined fontSize='small' color='primary' />}
                     />
                 )}
                 {productClassifications?.value && (
@@ -120,6 +122,7 @@ export function TechnicalDataDetail({ submodel }: SubmodelVisualizationProps) {
                         elements={productClassifications.value}
                         submodelId={submodel.id}
                         isExpanded={expandedItems.includes('productClassifications')}
+                        icon={<CategoryOutlined fontSize='small' color='primary' />}
                     />
                 )}
                 {furtherInformation?.value && (
@@ -129,6 +132,7 @@ export function TechnicalDataDetail({ submodel }: SubmodelVisualizationProps) {
                         elements={furtherInformation.value}
                         submodelId={submodel.id}
                         isExpanded={expandedItems.includes('furtherInformation')}
+                        icon={<NotesOutlined fontSize='small' color='primary' />}
                     />
                 )}
                 {cannotRenderTechnicalData && <GenericSubmodelDetailComponent submodel={submodel} />}

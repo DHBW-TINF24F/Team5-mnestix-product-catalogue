@@ -18,17 +18,20 @@ jest.mock('./TechnicalDataElement', () => ({
     TechnicalDataElement: ({
         label,
         header,
-        isExpanded
+        isExpanded,
+        icon,
     }: {
         label: string;
         header: string;
         isExpanded: boolean;
+        icon?: React.ReactNode;
     }) => (
         <div data-testid={`technical-data-element-${label}`}>
             <div data-testid={`header-${label}`}>{header}</div>
             <div data-testid={`expanded-${label}`}>
                 {isExpanded ? 'Expanded' : 'Collapsed'}
             </div>
+            {icon && <div data-testid={`icon-${label}`}>icon</div>}
         </div>
     )
 }));
@@ -118,8 +121,21 @@ describe('TechnicalDataDetail', () => {
         expect(screen.getByTestId('generic-submodel-detail')).toBeInTheDocument();
     });
 
-    it('should render expand all, collapse all and search buttons', () => {
+    it('should render an icon for each visible section', () => {
         // Arrange
+        const submodel = technicalDataTestSubmodels.completeTechnicalData as unknown as Submodel;
+
+        // Act
+        render(<TechnicalDataDetail submodel={submodel} />);
+
+        // Assert — every root section must have its icon rendered
+        expect(screen.getByTestId('icon-technicalProperties')).toBeInTheDocument();
+        expect(screen.getByTestId('icon-generalInformation')).toBeInTheDocument();
+        expect(screen.getByTestId('icon-productClassifications')).toBeInTheDocument();
+        expect(screen.getByTestId('icon-furtherInformation')).toBeInTheDocument();
+    });
+
+    it('should render expand all, collapse all and search buttons', () => {        // Arrange
         const submodel = technicalDataTestSubmodels.completeTechnicalData as unknown as Submodel;
 
         // Act
